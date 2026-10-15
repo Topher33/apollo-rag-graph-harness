@@ -23,3 +23,8 @@ Stage: **product idea**, M0 + M1 code written (see Status). Architecture is gove
 
 ## Conventions (from workspace AGENTS.md)
 Node.js (Express for API services, React + Vite for UI), tests with coverage (unit, integration, acceptance), architecture changes via RFC, progress recorded in `../change-logs/`, `ARCHITECTURE_OVERVIEW.txt` updated when services are added.
+
+## License
+Dual-licensed: **AGPL-3.0-only** for everyone able to comply with it (free for individuals, startups and open-source projects), plus a **commercial license** from TopherLabs LLC for embedding in closed-source products or running modified versions without publishing changes. See [NOTICE](NOTICE) and [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md).
+
+> Status: the official AGPL-3.0 text is not installed yet, so `LICENSE` still holds a proprietary placeholder (no license granted). Run `scripts/install-agpl-license.sh` from a machine with internet access before publishing. Outside contributions need a CLA first ([CONTRIBUTING.md](CONTRIBUTING.md)).

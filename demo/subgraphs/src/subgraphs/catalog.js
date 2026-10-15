@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 export const name = 'catalog';
 export const port = 4003;
 

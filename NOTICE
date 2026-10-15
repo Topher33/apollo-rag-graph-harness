@@ -1,0 +1,13 @@
+apollo-rag-graph-harness
+Copyright (c) 2026 TopherLabs LLC
+
+Licensed under the GNU Affero General Public License, version 3 only (AGPL-3.0-only). See LICENSE.
+A commercial license is available for uses that cannot or do not want to comply with the AGPL.
+See COMMERCIAL-LICENSE.md.
+
+"Apollo" and "Apollo GraphQL" are trademarks of their respective owner. This project is
+independent and is not affiliated with or endorsed by them.
+
+Third-party components keep their own licenses and are not relicensed here. Some packages the demo
+uses (for example Apollo router, gateway and composition components) may be distributed under licenses
+other than the AGPL; check each package before redistributing or hosting them.

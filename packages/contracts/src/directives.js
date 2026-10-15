@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 import { RELATION_TYPES, STRENGTH_CLASSES } from './vocabulary.js';
 
 /** SDL a subgraph includes so @relation / @semantic validate. Generated from the vocabulary. */

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 // Needs dependencies installed (npm install at the repo root). Verifies composition and a cross-subgraph query
 // end-to-end through an in-process gateway (no router/network needed).
 import test from 'node:test';

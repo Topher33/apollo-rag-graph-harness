@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 import { TRUST_TIERS } from './vocabulary.js';
 
 /** Higher number = more trusted. OWNER is highest. */

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 // Model-adapter contract. Business logic never imports a vendor SDK; it talks to this interface.
 //   complete(request)      -> { ok:true, value:string, model } | { ok:false, error }
 //   completeJSON(request)  -> { ok:true, value:any, model }    | { ok:false, error }   (request validated by completeJsonRequest schema)

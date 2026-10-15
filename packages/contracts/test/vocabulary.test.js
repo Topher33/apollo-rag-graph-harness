@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as V from '../src/vocabulary.js';

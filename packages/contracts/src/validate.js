@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import { isDeepStrictEqual } from 'node:util';

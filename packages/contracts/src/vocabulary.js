@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 // Controlled vocabulary. Single source of truth: schemas, directive SDL and tests derive from these lists.
 // Extend only through the "propose new term" path (see termProposal schema) with owner approval.
 

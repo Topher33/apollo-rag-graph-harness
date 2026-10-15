@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 import * as customers from './subgraphs/customers.js';
 import * as orders from './subgraphs/orders.js';
 import * as catalog from './subgraphs/catalog.js';

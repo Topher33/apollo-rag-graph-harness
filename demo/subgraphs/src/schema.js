@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only
+// Copyright (c) 2026 TopherLabs LLC
 import { parse } from 'graphql';
 import { buildSubgraphSchema } from '@apollo/subgraph';
 

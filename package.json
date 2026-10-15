@@ -2,6 +2,7 @@
   "name": "apollo-rag-graph-harness",
   "version": "0.0.1",
   "private": true,
+  "license": "AGPL-3.0-only",
   "type": "module",
   "description": "Model-agnostic governed semantic layer harness for federated Apollo GraphQL (working title).",
   "engines": { "node": ">=22" },

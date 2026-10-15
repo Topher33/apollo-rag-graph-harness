@@ -2,6 +2,7 @@
   "name": "@harness/contracts",
   "version": "0.0.1",
   "private": true,
+  "license": "AGPL-3.0-only",
   "type": "module",
   "description": "Stable contracts for the harness: vocabulary, JSON Schemas, validators, trust-tier logic, model-adapter interface, MCP tool schemas.",
   "main": "src/index.js",
