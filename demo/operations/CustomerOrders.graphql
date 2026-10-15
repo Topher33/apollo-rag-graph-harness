@@ -1,0 +1,11 @@
+query CustomerOrders($id: ID!, $limit: Int = 5) {
+  customer(id: $id) {
+    id
+    name
+    email
+    segment
+    tier
+    addresses { id city state kind }
+    orders(limit: $limit) { id status total }
+  }
+}

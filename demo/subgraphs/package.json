@@ -1,0 +1,25 @@
+{
+  "name": "@harness/demo-subgraphs",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Demo federated commerce supergraph: customers, orders, catalog, inventory subgraphs with deterministic seed data.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "compose": "node scripts/compose.js",
+    "test": "node --test test/",
+    "test:coverage": "node --test --experimental-test-coverage test/"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "@apollo/subgraph": "^2.9.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "@apollo/composition": "^2.9.0",
+    "@apollo/gateway": "^2.9.0"
+  }
+}

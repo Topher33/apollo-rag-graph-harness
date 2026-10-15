@@ -1,0 +1,22 @@
+query OrdersOverview($limit: Int = 5, $status: String) {
+  orders(limit: $limit, status: $status) {
+    id
+    placedAt
+    status
+    total
+    customer { id name tier }
+    shipTo { city state kind }
+    billTo { city state kind }
+    lines {
+      quantity
+      unitPrice
+      product {
+        sku
+        name
+        category { name }
+        supplier { name country }
+        totalAvailable
+      }
+    }
+  }
+}
