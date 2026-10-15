@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:harness:schema:decision",
+  "title": "Decision",
+  "description": "Append-only record of a proposal and the owner outcome. The primary compounding asset.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposalId",
+    "proposed",
+    "final",
+    "outcome",
+    "reviewer",
+    "ts",
+    "versions"
+  ],
+  "properties": {
+    "proposalId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proposed": {
+      "$ref": "urn:harness:schema:annotation"
+    },
+    "final": {
+      "anyOf": [
+        {
+          "$ref": "urn:harness:schema:annotation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "outcome": {
+      "enum": [
+        "ACCEPTED",
+        "EDITED",
+        "REJECTED"
+      ]
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "comment": {
+      "type": "string"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vocabulary"
+      ],
+      "properties": {
+        "vocabulary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "glossary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "REJECTED"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "final": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "ACCEPTED",
+              "EDITED"
+            ]
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "properties": {
+          "final": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

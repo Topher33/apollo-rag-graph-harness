@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:harness:schema:term-proposal",
+  "title": "TermProposal",
+  "description": "The \"propose new term\" path: creates a glossary/vocabulary request for owner approval instead of letting a model invent labels.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "term",
+    "kind",
+    "definition",
+    "justification",
+    "proposedBy",
+    "ts"
+  ],
+  "properties": {
+    "term": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "RELATION_TYPE",
+        "DOMAIN",
+        "GLOSSARY_TERM"
+      ]
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "justification": {
+      "type": "string",
+      "minLength": 1
+    },
+    "proposedBy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

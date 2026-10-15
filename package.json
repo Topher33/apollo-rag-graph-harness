@@ -1,0 +1,15 @@
+{
+  "name": "apollo-rag-graph-harness",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Model-agnostic governed semantic layer harness for federated Apollo GraphQL (working title).",
+  "engines": { "node": ">=22" },
+  "workspaces": ["packages/*", "demo/*"],
+  "scripts": {
+    "compose": "npm run compose -w @harness/demo-subgraphs",
+    "test": "npm test --workspaces --if-present",
+    "test:coverage": "npm run test:coverage --workspaces --if-present",
+    "schemas:export": "npm run export -w @harness/contracts"
+  }
+}

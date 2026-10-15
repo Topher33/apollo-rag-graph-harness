@@ -1,0 +1,18 @@
+{
+  "name": "@harness/contracts",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Stable contracts for the harness: vocabulary, JSON Schemas, validators, trust-tier logic, model-adapter interface, MCP tool schemas.",
+  "main": "src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "scripts": {
+    "test": "node --test test/",
+    "test:coverage": "node --test --experimental-test-coverage test/",
+    "export": "node scripts/export-schemas.js"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

@@ -1,0 +1,23 @@
+enum RelationType {
+  PURCHASED_BY
+  SHIPPED_TO
+  BILLED_TO
+  CONTAINS
+  REFERENCES
+  SUPPLIED_BY
+  STOCKED_AT
+  CATEGORIZED_AS
+  OWNED_BY
+  ASSOCIATED_WITH
+}
+
+enum Strength {
+  IDENTITY
+  CONTAINMENT
+  REFERENCE
+  ASSOCIATION
+}
+
+directive @relation(type: RelationType!, strength: Strength!, owner: String, reviewed: String) on FIELD_DEFINITION
+
+directive @semantic(domain: String!, embed: Boolean = false, term: String) on OBJECT | FIELD_DEFINITION

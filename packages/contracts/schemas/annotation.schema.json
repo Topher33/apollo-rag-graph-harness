@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:harness:schema:annotation",
+  "title": "Annotation",
+  "description": "A proposed or approved @relation / @semantic annotation on a schema type or field.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "target"
+  ],
+  "properties": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "strength"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "PURCHASED_BY",
+            "SHIPPED_TO",
+            "BILLED_TO",
+            "CONTAINS",
+            "REFERENCES",
+            "SUPPLIED_BY",
+            "STOCKED_AT",
+            "CATEGORIZED_AS",
+            "OWNED_BY",
+            "ASSOCIATED_WITH"
+          ]
+        },
+        "strength": {
+          "enum": [
+            "IDENTITY",
+            "CONTAINMENT",
+            "REFERENCE",
+            "ASSOCIATION"
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewed": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "semantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain"
+      ],
+      "properties": {
+        "domain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "embed": {
+          "type": "boolean",
+          "default": false
+        },
+        "term": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "relation"
+      ]
+    },
+    {
+      "required": [
+        "semantic"
+      ]
+    }
+  ],
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "relation"
+        ]
+      },
+      "then": {
+        "properties": {
+          "target": {
+            "required": [
+              "type",
+              "field"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

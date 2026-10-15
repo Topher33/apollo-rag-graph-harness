@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:harness:schema:adapter-complete-json-request",
+  "title": "CompleteJsonRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "prompt",
+    "schema"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema": {
+      "type": "object"
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2,
+      "default": 0
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "maxTokens": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}
