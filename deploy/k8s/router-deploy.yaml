@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: router
+  labels: { app: router, app.kubernetes.io/part-of: apollo-harness-demo }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: router }
+  template:
+    metadata:
+      labels: { app: router, app.kubernetes.io/part-of: apollo-harness-demo }
+    spec:
+      containers:
+        - name: router
+          image: ghcr.io/apollographql/router
+          args: ["--config", "/config/router.yaml", "--supergraph", "/config/supergraph.graphql"]
+          ports:
+            - { name: graphql, containerPort: 4000 }
+            - { name: health, containerPort: 8088 }
+          readinessProbe:
+            httpGet: { path: /health, port: health }
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /health, port: health }
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          volumeMounts:
+            - { name: config, mountPath: /config, readOnly: true }
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { cpu: "1", memory: 512Mi }
+      volumes:
+        - name: config
+          configMap: { name: router-config }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: router
+  labels: { app: router }
+spec:
+  selector: { app: router }
+  ports:
+    - { name: graphql, port: 4000, targetPort: graphql }

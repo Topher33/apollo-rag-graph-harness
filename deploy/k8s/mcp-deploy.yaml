@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apollo-mcp
+  labels: { app: apollo-mcp, app.kubernetes.io/part-of: apollo-harness-demo }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: apollo-mcp }
+  template:
+    metadata:
+      labels: { app: apollo-mcp, app.kubernetes.io/part-of: apollo-harness-demo }
+    spec:
+      containers:
+        - name: apollo-mcp
+          image: ghcr.io/apollographql/apollo-mcp-server
+          # VERIFY: config file passed as the positional argument (v1 CLI). See deploy/README.md.
+          args: ["/config/mcp.yaml"]
+          ports:
+            - { name: http, containerPort: 8000 }
+          readinessProbe:
+            httpGet: { path: /health, port: http }
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - { name: config, mountPath: /config, readOnly: true }
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 500m, memory: 256Mi }
+      volumes:
+        - name: config
+          configMap: { name: mcp-config }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apollo-mcp
+  labels: { app: apollo-mcp }
+spec:
+  selector: { app: apollo-mcp }
+  ports:
+    - { name: http, port: 8000, targetPort: http }

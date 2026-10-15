@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: apollo-harness
+resources:
+  - namespace.yaml
+  - subgraphs.yaml
+  - router-deploy.yaml
+  - mcp-deploy.yaml
+# `deploy/scripts/up.sh` generates generated/* (supergraph from `npm run compose`, operations copied from demo/operations).
+configMapGenerator:
+  - name: router-config
+    files:
+      - router.yaml=router-config.yaml
+      - supergraph.graphql=generated/supergraph.graphql
+  - name: mcp-config
+    files:
+      - mcp.yaml=mcp-config.yaml
+      - supergraph.graphql=generated/supergraph.graphql
+      - OrdersOverview.graphql=generated/OrdersOverview.graphql
+      - CustomerOrders.graphql=generated/CustomerOrders.graphql
+# Tags chosen from the GitHub release pages (router v2.18.0; MCP server v1.20.0, last 1.x so the v1 config keys apply). Confirm with `docker pull` before deploying.
+images:
+  - name: harness/demo-subgraphs
+    newTag: dev
+  - name: ghcr.io/apollographql/router
+    newTag: v2.18.0
+  - name: ghcr.io/apollographql/apollo-mcp-server
+    newTag: v1.20.0

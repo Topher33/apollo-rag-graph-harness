@@ -1,0 +1,179 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customers
+  labels: { app: customers, app.kubernetes.io/part-of: apollo-harness-demo }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: customers }
+  template:
+    metadata:
+      labels: { app: customers, app.kubernetes.io/part-of: apollo-harness-demo }
+    spec:
+      containers:
+        - name: customers
+          image: harness/demo-subgraphs
+          imagePullPolicy: IfNotPresent
+          env:
+            - { name: SUBGRAPH, value: "customers" }
+            - { name: PORT, value: "4001" }
+            - { name: SEED, value: "42" }
+          ports:
+            - { name: http, containerPort: 4001 }
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 384Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customers
+  labels: { app: customers }
+spec:
+  selector: { app: customers }
+  ports:
+    - { name: http, port: 4001, targetPort: http }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders
+  labels: { app: orders, app.kubernetes.io/part-of: apollo-harness-demo }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: orders }
+  template:
+    metadata:
+      labels: { app: orders, app.kubernetes.io/part-of: apollo-harness-demo }
+    spec:
+      containers:
+        - name: orders
+          image: harness/demo-subgraphs
+          imagePullPolicy: IfNotPresent
+          env:
+            - { name: SUBGRAPH, value: "orders" }
+            - { name: PORT, value: "4002" }
+            - { name: SEED, value: "42" }
+          ports:
+            - { name: http, containerPort: 4002 }
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 384Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders
+  labels: { app: orders }
+spec:
+  selector: { app: orders }
+  ports:
+    - { name: http, port: 4002, targetPort: http }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog
+  labels: { app: catalog, app.kubernetes.io/part-of: apollo-harness-demo }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: catalog }
+  template:
+    metadata:
+      labels: { app: catalog, app.kubernetes.io/part-of: apollo-harness-demo }
+    spec:
+      containers:
+        - name: catalog
+          image: harness/demo-subgraphs
+          imagePullPolicy: IfNotPresent
+          env:
+            - { name: SUBGRAPH, value: "catalog" }
+            - { name: PORT, value: "4003" }
+            - { name: SEED, value: "42" }
+          ports:
+            - { name: http, containerPort: 4003 }
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 384Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog
+  labels: { app: catalog }
+spec:
+  selector: { app: catalog }
+  ports:
+    - { name: http, port: 4003, targetPort: http }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory
+  labels: { app: inventory, app.kubernetes.io/part-of: apollo-harness-demo }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: inventory }
+  template:
+    metadata:
+      labels: { app: inventory, app.kubernetes.io/part-of: apollo-harness-demo }
+    spec:
+      containers:
+        - name: inventory
+          image: harness/demo-subgraphs
+          imagePullPolicy: IfNotPresent
+          env:
+            - { name: SUBGRAPH, value: "inventory" }
+            - { name: PORT, value: "4004" }
+            - { name: SEED, value: "42" }
+          ports:
+            - { name: http, containerPort: 4004 }
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { cpu: 500m, memory: 384Mi }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory
+  labels: { app: inventory }
+spec:
+  selector: { app: inventory }
+  ports:
+    - { name: http, port: 4004, targetPort: http }

@@ -1,0 +1,21 @@
+# Apollo MCP Server config (mounted at /config/mcp.yaml). Keys per the v1 config-file reference.
+endpoint: http://router:4000/
+schema:
+  source: local
+  path: /config/supergraph.graphql
+operations:
+  source: local
+  paths:
+    - /config/OrdersOverview.graphql
+    - /config/CustomerOrders.graphql
+transport:
+  type: streamable_http
+  address: 0.0.0.0
+  port: 8000
+health_check:
+  enabled: true
+introspection:
+  introspect: { enabled: true }
+  search: { enabled: true }
+  validate: { enabled: true }
+  execute: { enabled: true }
