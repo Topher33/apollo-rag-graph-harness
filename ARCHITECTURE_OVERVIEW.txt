@@ -1,0 +1,37 @@
+Architecture overview - short summary
+
+Last-updated: 2026-10-15T00:35:44Z
+
+Summary:
+- apollo-rag-graph-harness: governed, model-agnostic semantic layer for federated Apollo GraphQL (RFC-0001, Draft).
+- Implemented so far: M0 contracts package and M1 demo supergraph (deployment files; not yet deployed or run end-to-end).
+
+Services (namespace apollo-harness, k3s):
+- customers: demo subgraph, port 4001, Node.js (Apollo Server 4 + Express), GET /healthz, POST /graphql
+- orders: demo subgraph, port 4002, same image (SUBGRAPH=orders)
+- catalog: demo subgraph, port 4003, same image (SUBGRAPH=catalog)
+- inventory: demo subgraph, port 4004, same image (SUBGRAPH=inventory)
+- router: Apollo Router, ports 4000 (GraphQL) and 8088 (health); local supergraph, no GraphOS
+- apollo-mcp: Apollo MCP Server, port 8000 (streamable HTTP), points at router:4000
+
+Planned services (not implemented; see RFC-0001): schema-watcher, ontology-extractor, glossary-svc, proposer-agent,
+review-bridge, decision-log, compressor-indexer, retrieval-svc (MCP), model-adapter, eval-harness.
+
+Messaging:
+- none (planned: Postgres-based jobs via pg-boss; no broker)
+
+Datastores:
+- demo subgraphs: in-memory deterministic seed data (seed 42, ~8.5k entities); no database
+- planned: Postgres + pgvector (decisions, graph tables, vectors)
+
+External dependencies:
+- ghcr.io/apollographql/router, ghcr.io/apollographql/apollo-mcp-server (image tags to verify, see deploy/README.md)
+- k3s cluster, local image import (no registry required)
+
+Notes:
+  client/agent --> apollo-mcp:8000 --> router:4000 --> customers:4001
+                                                   +-> orders:4002
+                                                   +-> catalog:4003
+                                                   +-> inventory:4004
+- Supergraph is composed offline by `npm run compose` (@apollo/composition) and mounted into router and MCP server via ConfigMaps.
+- Contracts (packages/contracts) are the stable API for later services: annotation, edge, decision, term-proposal, model-adapter, MCP tool schemas.
